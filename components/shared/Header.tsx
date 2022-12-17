@@ -10,13 +10,13 @@ const Header: FC = () => {
         </Link>
         <Link
           href="/todo/ssr"
-          className="pl-5 hidden lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-800"
+          className="pl-5 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-800"
         >
           Todos(SSR)
         </Link>
         <Link
           href="/todo/csr"
-          className="pl-5 hidden lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-800"
+          className="pl-5 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-800"
         >
           Todos(CSR)
         </Link>

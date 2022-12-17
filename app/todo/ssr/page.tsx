@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/server/db'
 
-export const revalidate = 60
+// export const revalidate = 60
 
 async function getToDos() {
   return await prisma.todo.findMany({

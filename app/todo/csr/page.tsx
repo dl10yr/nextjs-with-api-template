@@ -1,18 +1,25 @@
+'use client'
+import { Button } from '@/components/shared/Button'
 import TodoForm from '@/components/todo/TodoForm'
-import { prisma } from '@/lib/server/db'
+import { deleteTodo, getTodos } from '@/lib/client/api/todos'
+import { Todo } from '@/lib/shared/todo'
+import { useEffect, useState } from 'react'
 
-export const revalidate = 60
+export default function Page() {
+  const [todos, setTodos] = useState<Array<Todo>>([])
 
-async function getToDos() {
-  return await prisma.todo.findMany({
-    include: {
-      user: true,
-    },
-  })
-}
+  const fetchTodos = async () => {
+    setTodos(await getTodos())
+  }
 
-export default async function Page() {
-  const todos = await getToDos()
+  useEffect(() => {
+    fetchTodos()
+  }, [])
+
+  const clickDeleteButton = async (id: string) => {
+    await deleteTodo(id)
+    await fetchTodos()
+  }
 
   return (
     <div className="w-full">
@@ -22,13 +29,14 @@ export default async function Page() {
       <section className="p-3 max-w-screen-sm m-auto">
         <h3 className="text-2xl font-bold m-2 text-center">ToDoリスト（CSR）</h3>
         <ul className="m-3">
-          {todos.map((log, index: number) => {
+          {todos.map((todo: Todo, index: number) => {
             return (
               <li key={index} className="m-3 p-3 bg-white rounded">
                 <div>
-                  <div className="font-bold">{log.user.name}</div>
-                  <div className="mt-3 break-words">{log.content}</div>
+                  <div className="font-bold">{todo.user.name}</div>
+                  <div className="mt-3 break-words">{todo.content}</div>
                 </div>
+                <Button onClick={async () => await clickDeleteButton(todo.id)} label={'削除する'} />
               </li>
             )
           })}
