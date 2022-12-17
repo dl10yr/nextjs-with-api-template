@@ -5,6 +5,7 @@
 ## 詳しい説明
 
 こちらの記事で説明してます
+https://zenn.dev/dl10yr/articles/nextjs-with-api-template
 
 ## ページ構成
 
