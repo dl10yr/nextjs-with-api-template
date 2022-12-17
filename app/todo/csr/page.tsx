@@ -39,7 +39,7 @@ export default function Page() {
             return (
               <li key={index} className="m-3 p-3 bg-white rounded">
                 <div>
-                  <div className="font-bold">{todo.user.name}</div>
+                  <div className="font-bold">{todo.name}</div>
                   <div className="mt-3 break-words">{todo.content}</div>
                 </div>
                 <Button onClick={async () => await clickDeleteButton(todo.id)} label={'削除する'} />
