@@ -10,8 +10,8 @@ https://zenn.dev/dl10yr/articles/nextjs-with-api-template
 ## ページ構成
 
 - `/`: index
-- `/todos/ssr`: SSR で DB から Todo を取得して表示してます
-- `/todos/csr`: CSR で DB から Todo を取得して表示、フォームを使って投稿。
+- `/todo/ssr`: SSR で DB から Todo を取得して表示してます
+- `/todo/csr`: CSR で DB から Todo を取得して表示、フォームを使って投稿。
 
 ## API
 
