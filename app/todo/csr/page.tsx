@@ -1,9 +1,11 @@
 'use client'
+import { useEffect, useState } from 'react'
+
 import { Button } from '@/components/shared/Button'
 import TodoForm from '@/components/todo/TodoForm'
+
 import { deleteTodo, getTodos } from '@/lib/client/api/todos'
 import { Todo } from '@/lib/shared/todo'
-import { useEffect, useState } from 'react'
 
 export default function Page() {
   const [todos, setTodos] = useState<Array<Todo>>([])
@@ -21,10 +23,14 @@ export default function Page() {
     await fetchTodos()
   }
 
+  const onCreateTodo = async () => {
+    await fetchTodos()
+  }
+
   return (
     <div className="w-full">
       <section className="p-2 max-w-screen-sm m-auto">
-        <TodoForm />
+        <TodoForm onCreateTodo={onCreateTodo} />
       </section>
       <section className="p-3 max-w-screen-sm m-auto">
         <h3 className="text-2xl font-bold m-2 text-center">ToDoリスト（CSR）</h3>

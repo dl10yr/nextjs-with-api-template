@@ -10,7 +10,7 @@ const deleteHandler: NextApiHandler = async (req: NextApiRequestWithUser, res: N
 
   await deleteTodo(id as string)
 
-  res.status(204)
+  res.status(204).end()
 }
 
 export default apiRoute({

@@ -1,41 +1,14 @@
 'use client'
+import { FC, useState } from 'react'
 import { postTodo } from '@/lib/client/api/todos'
-import { firebaseClientAuth } from '@/lib/client/firebaseClient'
-import { onAuthStateChanged, signInAnonymously } from 'firebase/auth'
-import { FC, useEffect, useState } from 'react'
 import { Button } from '../shared/Button'
 
-const EntryLogForm: FC = () => {
-  const [, setUser] = useState({ uid: '' })
+export interface TodoFormProps {
+  onCreateTodo?: () => Promise<void>
+}
+
+const TodoForm: FC<TodoFormProps> = ({ onCreateTodo }: TodoFormProps) => {
   const [formData, setFormData] = useState({ name: '', content: '' })
-
-  const fetchSetUser = async () => {
-    try {
-      onAuthStateChanged(firebaseClientAuth, async (user) => {
-        if (!user) {
-          signInAnonymously(firebaseClientAuth)
-            .then(async (e) => {
-              if (e.user) {
-                setUser({ uid: e.user.uid })
-              }
-            })
-            .catch(() => {
-              // console.log(error)
-            })
-        } else {
-          setUser({
-            uid: user.uid,
-          })
-        }
-      })
-    } catch {
-      setUser({ uid: '' })
-    }
-  }
-
-  useEffect(() => {
-    fetchSetUser()
-  }, [])
 
   const isValidForm = () => {
     const isValidName = formData.name.length > 0
@@ -51,6 +24,7 @@ const EntryLogForm: FC = () => {
         e.preventDefault()
         try {
           await postTodo(formData)
+          await onCreateTodo()
         } catch (e) {
           console.error(e)
         }
@@ -89,4 +63,4 @@ const EntryLogForm: FC = () => {
   )
 }
 
-export default EntryLogForm
+export default TodoForm

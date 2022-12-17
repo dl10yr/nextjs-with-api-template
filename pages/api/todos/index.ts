@@ -3,9 +3,11 @@ import { ulid } from 'ulid'
 
 import { apiRoute, NextApiRequestWithUser } from '@/lib/server/apiRoute'
 import { prisma } from '@/lib/server/db'
+import { getTodos } from '@/lib/server/todo'
 
 const getHandler: NextApiHandler = async (req, res) => {
-  res.status(200).json('ok')
+  const todos = await getTodos()
+  res.status(200).json({ todos })
 }
 
 const postHandler: NextApiHandler = async (req: NextApiRequestWithUser, res) => {
