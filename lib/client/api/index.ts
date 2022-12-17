@@ -6,7 +6,7 @@ import * as todoApi from './todos'
 const axiosInstance = axios.create()
 
 axiosInstance.interceptors.request.use(async (config) => {
-  config.baseURL = 'http://localhost:3000/api/'
+  config.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000/api'
 
   const idToken = await firebaseClientAuth.currentUser.getIdToken()
 
