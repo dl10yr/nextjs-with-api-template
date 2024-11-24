@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Router from 'next/router'
 import { onAuthStateChanged, signInAnonymously } from 'firebase/auth'
 import { useSetAtom } from 'jotai'
+import styles from './layout.module.scss'
 
 import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
@@ -94,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <AppInit />
           <Header />
-          <main className="bg-blue-100 text-black">{children}</main>
+          <main className={styles.container}>{children}</main>
           <Footer />
         </Providers>
       </body>

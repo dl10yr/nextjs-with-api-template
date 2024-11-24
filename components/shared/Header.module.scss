@@ -1,0 +1,60 @@
+/* app/components/shared/Header.module.scss */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 1rem;
+  border-bottom: 4px solid black;
+  color: black;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  @media (min-width: 1024px) {
+    justify-content: space-between;
+  }
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  color: black;
+  margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  padding-left: 0.5rem;
+  color: #38b2ac; /* text-teal-lighter */
+
+  &:hover {
+    color: #1f2937; /* hover:text-gray-800 */
+  }
+
+  @media (min-width: 1024px) {
+    display: inline-block;
+    margin-top: 0;
+  }
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2rem;
+  cursor: pointer;
+  letter-spacing: -0.05em; /* Equivalent to tracking-tight */
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    width: auto;
+  }
+}

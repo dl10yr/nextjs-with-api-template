@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import { FC } from 'react'
+import styles from './Footer.module.scss'
 
 const Footer: FC = () => {
   return (
-    <footer className="bg-white text-black border-t border-gray-500 text-center p-5">
-      <div className="flex justify-center flex-no-shrink text-black mr-6 mb-2 lg:my-0">
-        <Link
-          href="/"
-          className="pl-2 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-800"
-        >
+    <footer className={styles.footer}>
+      <div className={styles.linkContainer}>
+        <Link href="/" className={styles.link}>
           TOP
         </Link>
       </div>
-      <div className="my-2">Copyright© XXX , 2022 All Rights Reserved.</div>
+      <div className={styles.copyright}>
+        Copyright© XXX , 2022 All Rights Reserved.
+      </div>
     </footer>
   )
 }

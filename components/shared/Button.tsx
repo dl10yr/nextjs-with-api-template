@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import styles from './Button.module.scss'
 
 export interface ButtonProps {
   primary?: boolean
@@ -19,21 +20,21 @@ export const Button: FC<ButtonProps> = ({
   type = 'button',
   ...props
 }) => {
-  const baseButton = 'rounded-md font-bold'
   const sizeMode =
     size === 'small'
-      ? 'py-1.5 px-4 text-xs'
+      ? styles.sizeSmall
       : size === 'medium'
-      ? 'py-2 px-5 text-sm'
+      ? styles.sizeMedium
       : size === 'large'
-      ? 'py-3 px-6 text-base'
+      ? styles.sizeLarge
       : size === 'fullwidth'
-      ? 'py-3 px-6 w-full text-base'
+      ? styles.sizeFullwidth
       : ''
 
   const className = disabled
-    ? `text-gray-400 bg-gray-300 ${baseButton} ${sizeMode}`
-    : `text-white bg-blue-800 ${baseButton} ${sizeMode}`
+    ? `${styles.disabled} ${styles.baseButton} ${sizeMode}`
+    : `${styles.enabled} ${styles.baseButton} ${sizeMode}`
+
   return primary ? (
     <button className={className} disabled={disabled} {...props}>
       {label}
