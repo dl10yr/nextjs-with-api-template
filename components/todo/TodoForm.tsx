@@ -5,7 +5,7 @@ import { Button } from '../shared/Button'
 import styles from './TodoForm.module.scss'
 
 export interface TodoFormProps {
-  onCreateTodo?: () => Promise<void>
+  onCreateTodo: () => Promise<void>
 }
 
 const TodoForm: FC<TodoFormProps> = ({ onCreateTodo }: TodoFormProps) => {
