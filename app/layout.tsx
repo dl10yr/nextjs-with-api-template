@@ -8,7 +8,6 @@ import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
 
 import * as gtag from '@/lib/client/gtag'
-import { existsGaId, GA_ID } from '@/lib/client/gtag'
 import { firebaseClientAuth } from '@/lib/client/firebaseClient'
 import { currentUserState } from '@/lib/client/atoms/currentUser'
 
@@ -72,9 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html>
       <head>
         {/* Google Analytics */}
-        {existsGaId && (
+        {/* {existsGaId && (
           <>
-            {' '}
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
             <script
               dangerouslySetInnerHTML={{
@@ -88,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
           </>
-        )}
+        )} */}
       </head>
       <body>
         <RecoilRoot>
