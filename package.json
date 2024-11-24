@@ -8,7 +8,6 @@
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "prepare": "husky install",
     "prisma:generate": "yarn prisma genearate",
     "prisma:push": "yarn prisma db push",
     "pscale:shell": "pscale shell {database} main"
