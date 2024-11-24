@@ -26,9 +26,9 @@ const AppInit = () => {
             .then(async (e) => {
               if (e.user) {
                 setCurrentUser({
-                  uid: e.user.uid,
+                  uid: e.user.uid ?? '',
                   displayName: e.user.displayName,
-                  isAnonymus: e.user.isAnonymous,
+                  isAnonymous: e.user.isAnonymous,
                 })
               }
               // eslint-disable-next-line no-console
@@ -38,14 +38,18 @@ const AppInit = () => {
             })
         } else {
           setCurrentUser({
-            uid: user.uid,
+            uid: user.uid ?? '',
             displayName: user.displayName,
-            isAnonymus: user.isAnonymous,
+            isAnonymous: user.isAnonymous,
           })
         }
       })
     } catch {
-      setCurrentUser(null)
+      setCurrentUser({
+        uid: null,
+        displayName: null,
+        isAnonymous: null,
+      })
     }
   }
   useEffect(() => {

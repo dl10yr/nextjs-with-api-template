@@ -1,11 +1,11 @@
 import { atom } from 'jotai'
 
 export const currentUserAtom = atom<{
-  uid: string,
-  displayName: string,
-  isAnonymous: boolean
+  uid: string | null,
+  displayName: string | null,
+  isAnonymous: boolean | null
 }>({
-  uid: '',
-  displayName: '',
-  isAnonymous: false,
+  uid: null,
+  displayName: null,
+  isAnonymous: null,
 })
