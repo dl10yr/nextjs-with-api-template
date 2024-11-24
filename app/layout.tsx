@@ -1,20 +1,22 @@
 'use client'
 import { useEffect } from 'react'
 import Router from 'next/router'
-import { RecoilRoot, useSetRecoilState } from 'recoil'
 import { onAuthStateChanged, signInAnonymously } from 'firebase/auth'
+import { useSetAtom } from 'jotai'
 
 import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
+import { Providers } from '@/components/shared/Providers'
+
 
 import * as gtag from '@/lib/client/gtag'
 import { firebaseClientAuth } from '@/lib/client/firebaseClient'
-import { currentUserState } from '@/lib/client/atoms/currentUser'
+import { currentUserAtom } from '@/lib/client/atoms/currentUser'
 
 import './globals.css'
 
 const AppInit = () => {
-  const setCurrentUser = useSetRecoilState(currentUserState)
+  const setCurrentUser = useSetAtom(currentUserAtom)
   const fetchSetUser = async () => {
     try {
       onAuthStateChanged(firebaseClientAuth, async (user) => {
@@ -89,12 +91,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )} */}
       </head>
       <body>
-        <RecoilRoot>
+        <Providers>
           <AppInit />
           <Header />
           <main className="bg-blue-100 text-black">{children}</main>
           <Footer />
-        </RecoilRoot>
+        </Providers>
       </body>
     </html>
   )

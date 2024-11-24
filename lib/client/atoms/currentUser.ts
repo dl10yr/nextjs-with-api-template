@@ -1,6 +1,5 @@
-import { atom } from 'recoil'
+import { atom } from 'jotai'
 
-export const currentUserState = atom({
-  key: 'CurrentUser',
+export const currentUserAtom = atom({
   default: undefined,
 })

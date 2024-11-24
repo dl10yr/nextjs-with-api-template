@@ -1,8 +1,8 @@
-import { useRecoilValue } from 'recoil'
-import { currentUserState } from '../atoms/currentUser'
+import { useAtom } from 'jotai'
+import { currentUserAtom } from '../atoms/currentUser'
 
 export function useCurrentUser() {
-  const currentUser = useRecoilValue(currentUserState)
+  const currentUser = useAtom(currentUserAtom)
   const isChecking = currentUser === undefined
 
   return {
