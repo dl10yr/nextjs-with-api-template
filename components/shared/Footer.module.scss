@@ -25,7 +25,10 @@
     display: inline-block;
     margin-top: 0;
   }
-  color: #38b2ac; /* text-teal-lighter */
+
+  & {
+    color: #38b2ac;
+  }
   &:hover {
     color: #1f2937; /* hover:text-gray-800 */
   }
