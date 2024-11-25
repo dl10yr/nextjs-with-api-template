@@ -3,7 +3,11 @@ import { firebaseAdminAuth } from '@/lib/server/firebaseAdmin'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export async function authPlugin(req: NextRequest) {
+export type NextRequestWithUser = NextRequest & {
+  $user: { id: string }
+}
+
+export async function authPlugin(req: NextRequestWithUser) {
   const idToken = req.headers.get('authorization')
 
   if (!idToken) {
@@ -20,7 +24,7 @@ export async function authPlugin(req: NextRequest) {
 
   try {
     const decodedToken = await firebaseAdminAuth.verifyIdToken(idToken.slice(7))
-    req.headers.set('user-id', decodedToken.user_id)
+    req.$user = { id: decodedToken.uid }
   } catch (error) {
     console.error(error)
     return NextResponse.json(

@@ -1,13 +1,13 @@
-import { authPlugin } from '@/lib/server/authPlugin'
+import { type NextRequestWithUser, authPlugin } from '@/lib/server/authPlugin'
 import { prisma } from '@/lib/server/db'
-import { type NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { ulid } from 'ulid'
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(req: NextRequestWithUser, { params }) {
   try {
     await authPlugin(req)
 
-    const userId = req.headers.get('user-id')
+    const userId = req.$user.id
     if (!userId) {
       return NextResponse.json(
         {
@@ -37,13 +37,13 @@ export async function GET(req: NextRequest, { params }) {
   }
 }
 
-export async function POST(req: NextRequest, { params }) {
+export async function POST(req: NextRequestWithUser, { params }) {
   try {
     await authPlugin(req)
 
     const { name, content } = await req.json()
     const id = ulid()
-    const userId = req.headers.get('user-id')
+    const userId = req.$user.id
 
     if (!userId) {
       return NextResponse.json(

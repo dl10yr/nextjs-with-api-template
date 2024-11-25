@@ -1,8 +1,7 @@
-import { authPlugin } from '@/lib/server/authPlugin'
+import { type NextRequestWithUser, authPlugin } from '@/lib/server/authPlugin'
 import { deleteTodo } from '@/lib/server/todo'
-import type { NextRequest } from 'next/server'
 
-export default async function DELETE(req: NextRequest, { params }) {
+export default async function DELETE(req: NextRequestWithUser, { params }) {
   await authPlugin(req)
 
   const id = params.slug
