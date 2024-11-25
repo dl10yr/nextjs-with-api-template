@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import styles from './Button.module.scss'
 
 export interface ButtonProps {
@@ -24,12 +24,12 @@ export const Button: FC<ButtonProps> = ({
     size === 'small'
       ? styles.sizeSmall
       : size === 'medium'
-      ? styles.sizeMedium
-      : size === 'large'
-      ? styles.sizeLarge
-      : size === 'fullwidth'
-      ? styles.sizeFullwidth
-      : ''
+        ? styles.sizeMedium
+        : size === 'large'
+          ? styles.sizeLarge
+          : size === 'fullwidth'
+            ? styles.sizeFullwidth
+            : ''
 
   const className = disabled
     ? `${styles.disabled} ${styles.baseButton} ${sizeMode}`

@@ -1,7 +1,7 @@
-import { authPlugin } from "@/lib/server/authPlugin";
-import { prisma } from "@/lib/server/db";
-import { NextRequest, NextResponse } from "next/server";
-import { ulid } from "ulid";
+import { authPlugin } from '@/lib/server/authPlugin'
+import { prisma } from '@/lib/server/db'
+import { type NextRequest, NextResponse } from 'next/server'
+import { ulid } from 'ulid'
 
 export async function GET(req: NextRequest, { params }) {
   try {
@@ -9,25 +9,31 @@ export async function GET(req: NextRequest, { params }) {
 
     const userId = req.headers.get('user-id')
     if (!userId) {
-      return NextResponse.json({
-        error: {
-          message: 'user not authenticated',
-          statusCode: 401,
+      return NextResponse.json(
+        {
+          error: {
+            message: 'user not authenticated',
+            statusCode: 401,
+          },
         },
-      }, { status: 401 })
+        { status: 401 },
+      )
     }
 
     const todos = await prisma.todo.findMany({
       where: { userId },
     })
 
-    return NextResponse.json({todos})
+    return NextResponse.json({ todos })
   } catch (error) {
-    return NextResponse.json({
-      error: {
-        message: 'internal server error',
+    return NextResponse.json(
+      {
+        error: {
+          message: 'internal server error',
+        },
       },
-    }, { status: 500 })
+      { status: 500 },
+    )
   }
 }
 
@@ -40,12 +46,15 @@ export async function POST(req: NextRequest, { params }) {
     const userId = req.headers.get('user-id')
 
     if (!userId) {
-      return NextResponse.json({
-        error: {
-          message: 'user not authenticated',
-          statusCode: 401,
+      return NextResponse.json(
+        {
+          error: {
+            message: 'user not authenticated',
+            statusCode: 401,
+          },
         },
-      }, { status: 401 })
+        { status: 401 },
+      )
     }
 
     const user = await prisma.user.findUnique({
@@ -85,11 +94,14 @@ export async function POST(req: NextRequest, { params }) {
     return NextResponse.json(created, { status: 201 })
   } catch (error) {
     console.error(error)
-    return NextResponse.json({
-      error: {
-        message: 'Internal Server Error',
-        statusCode: 500,
+    return NextResponse.json(
+      {
+        error: {
+          message: 'Internal Server Error',
+          statusCode: 500,
+        },
       },
-    }, { status: 500 })
+      { status: 500 },
+    )
   }
 }

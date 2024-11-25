@@ -6,7 +6,7 @@ import { Button } from '@/components/shared/Button'
 import TodoForm from '@/components/todo/TodoForm'
 
 import { deleteTodo, getTodos } from '@/lib/client/api/todos'
-import { Todo } from '@/lib/shared/todo'
+import type { Todo } from '@/lib/shared/todo'
 
 export default function Page() {
   const [todos, setTodos] = useState<Array<Todo>>([])
@@ -15,6 +15,7 @@ export default function Page() {
     setTodos(await getTodos())
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     fetchTodos()
   }, [])
@@ -38,12 +39,16 @@ export default function Page() {
         <ul className={styles.ul}>
           {todos.map((todo: Todo, index: number) => {
             return (
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               <li key={index} className={styles.todoItem}>
                 <div>
                   <div className={styles.todoName}>{todo.name}</div>
                   <div className={styles.todoContent}>{todo.content}</div>
                 </div>
-                <Button onClick={async () => await clickDeleteButton(todo.id)} label={'削除する'} />
+                <Button
+                  onClick={async () => await clickDeleteButton(todo.id)}
+                  label={'削除する'}
+                />
               </li>
             )
           })}

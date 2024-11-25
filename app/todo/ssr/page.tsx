@@ -23,6 +23,7 @@ export default async function Page() {
         <ul className={styles.ul}>
           {todos.map((todo, index: number) => {
             return (
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               <li key={index} className={styles.todoItem}>
                 <div>
                   <div className={styles.todoName}>{todo.name}</div>

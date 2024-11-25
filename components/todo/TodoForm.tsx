@@ -1,6 +1,6 @@
 'use client'
-import { FC, useState } from 'react'
 import { postTodo } from '@/lib/client/api/todos'
+import { type FC, useState } from 'react'
 import { Button } from '../shared/Button'
 import styles from './TodoForm.module.scss'
 
@@ -13,14 +13,16 @@ const TodoForm: FC<TodoFormProps> = ({ onCreateTodo }: TodoFormProps) => {
 
   const isValidForm = () => {
     const isValidName = formData.name.length > 0
-    const isValidContent = formData.content.length > 0 && formData.content.length < 500
+    const isValidContent =
+      formData.content.length > 0 && formData.content.length < 500
     return isValidName && isValidContent
   }
 
   return (
     <form
-      name="postform"
+      name='postform'
       className={styles.form}
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       onSubmit={async (e: any) => {
         e.preventDefault()
         try {
@@ -32,33 +34,33 @@ const TodoForm: FC<TodoFormProps> = ({ onCreateTodo }: TodoFormProps) => {
       }}
     >
       <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="name">
+        <label className={styles.label} htmlFor='name'>
           Todoの名前
         </label>
         <input
           className={styles.input}
-          id="name"
-          type="text"
-          placeholder="Todoの名前（1文字以上30文字以下）"
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          id='name'
+          type='text'
+          placeholder='Todoの名前（1文字以上30文字以下）'
+          onChange={e => setFormData({ ...formData, name: e.target.value })}
         />
-        <label className={styles.label} htmlFor="content">
+        <label className={styles.label} htmlFor='content'>
           Todoの内容
         </label>
         <textarea
           className={styles.textarea}
-          id="content"
-          placeholder="Todoの内容（1文字以上300文字以下）"
+          id='content'
+          placeholder='Todoの内容（1文字以上300文字以下）'
           rows={10}
-          onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+          onChange={e => setFormData({ ...formData, content: e.target.value })}
         />
       </div>
       <Button
-        size="fullwidth"
-        label="追加する"
+        size='fullwidth'
+        label='追加する'
         primary={true}
         disabled={!isValidForm()}
-        type={`submit`}
+        type={'submit'}
       />
     </form>
   )

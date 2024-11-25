@@ -1,18 +1,21 @@
+import { firebaseAdminAuth } from '@/lib/server/firebaseAdmin'
 // middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { firebaseAdminAuth } from '@/lib/server/firebaseAdmin'
 
 export async function authPlugin(req: NextRequest) {
   const idToken = req.headers.get('authorization')
 
   if (!idToken) {
-    return NextResponse.json({
-      error: {
-        message: 'authorization required',
-        statusCode: 401,
+    return NextResponse.json(
+      {
+        error: {
+          message: 'authorization required',
+          statusCode: 401,
+        },
       },
-    }, { status: 401 })
+      { status: 401 },
+    )
   }
 
   try {
@@ -20,12 +23,15 @@ export async function authPlugin(req: NextRequest) {
     req.headers.set('user-id', decodedToken.user_id)
   } catch (error) {
     console.error(error)
-    return NextResponse.json({
-      error: {
-        message: 'invalid token',
-        statusCode: 401,
+    return NextResponse.json(
+      {
+        error: {
+          message: 'invalid token',
+          statusCode: 401,
+        },
       },
-    }, { status: 401 })
+      { status: 401 },
+    )
   }
 
   return NextResponse.next()

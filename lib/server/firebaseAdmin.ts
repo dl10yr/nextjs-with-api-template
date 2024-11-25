@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin'
-import { initializeApp, getApps } from 'firebase-admin/app'
+import { getApps, initializeApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 
 const apps = getApps()

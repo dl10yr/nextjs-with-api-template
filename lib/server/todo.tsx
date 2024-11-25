@@ -1,4 +1,4 @@
-import { Todo } from '../shared/todo'
+import type { Todo } from '../shared/todo'
 import { prisma } from './db'
 
 export const getTodos = async (): Promise<Array<Todo>> => {

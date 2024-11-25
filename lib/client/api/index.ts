@@ -5,8 +5,9 @@ import * as todoApi from './todos'
 
 const axiosInstance = axios.create()
 
-axiosInstance.interceptors.request.use(async (config) => {
-  config.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000/api'
+axiosInstance.interceptors.request.use(async config => {
+  config.baseURL =
+    process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000/api'
 
   const currentUser = firebaseClientAuth.currentUser
   if (!currentUser) {
@@ -19,11 +20,11 @@ axiosInstance.interceptors.request.use(async (config) => {
 })
 
 axiosInstance.interceptors.response.use(
-  (res) => res,
-  (err) => {
+  res => res,
+  err => {
     console.error(err)
     return null
-  }
+  },
 )
 
 export { axiosInstance, todoApi }

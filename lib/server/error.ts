@@ -1,4 +1,4 @@
-import { NextApiResponse } from 'next'
+import type { NextApiResponse } from 'next'
 
 type ApiErrorOption = {
   description: string
@@ -16,10 +16,13 @@ export class ApiError extends Error {
   }
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const apiErrorHandler = (error: any, res: NextApiResponse) => {
   if (error instanceof ApiError) {
     return res.status(error.statusCode).json({ description: error.descripton })
   }
 
-  return res.status(500).json({ error: { description: 'internal server error', statusCode: 500 } })
+  return res
+    .status(500)
+    .json({ error: { description: 'internal server error', statusCode: 500 } })
 }
