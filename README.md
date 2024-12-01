@@ -7,6 +7,9 @@
 こちらの記事で説明してます
 https://zenn.dev/dl10yr/articles/nextjs-with-api-template
 
+`2024/12`に更新しました。
+https://zenn.dev/dl10yr/articles/nextjs-with-api-template2024
+
 ## ページ構成
 
 - `/`: index
