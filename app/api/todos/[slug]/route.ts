@@ -3,7 +3,7 @@ import { deleteTodo } from '@/lib/server/todo'
 
 export async function DELETE(
   req: NextRequestWithUser,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   await authPlugin(req)
 
