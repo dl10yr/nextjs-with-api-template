@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/server/db'
+import styles from './page.module.scss'
 
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
@@ -16,16 +17,17 @@ export default async function Page() {
   const todos = await getTodos()
 
   return (
-    <div className="w-full">
-      <section className="p-3 max-w-screen-sm m-auto">
-        <h3 className="text-2xl font-bold m-2 text-center">ToDoリスト（SSR）</h3>
-        <ul className="m-3">
+    <div className={styles.container}>
+      <section className={styles.section}>
+        <h3 className={styles.heading}>ToDoリスト（SSR）</h3>
+        <ul className={styles.ul}>
           {todos.map((todo, index: number) => {
             return (
-              <li key={index} className="m-3 p-3 bg-white rounded">
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              <li key={index} className={styles.todoItem}>
                 <div>
-                  <div className="font-bold">{todo.name}</div>
-                  <div className="mt-3 break-words">{todo.content}</div>
+                  <div className={styles.todoName}>{todo.name}</div>
+                  <div className={styles.todoContent}>{todo.content}</div>
                 </div>
               </li>
             )

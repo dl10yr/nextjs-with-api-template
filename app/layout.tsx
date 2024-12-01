@@ -1,32 +1,33 @@
 'use client'
-import { useEffect } from 'react'
-import Router from 'next/router'
-import { RecoilRoot, useSetRecoilState } from 'recoil'
 import { onAuthStateChanged, signInAnonymously } from 'firebase/auth'
+import { useSetAtom } from 'jotai'
+import Router from 'next/router'
+import { useEffect } from 'react'
+import styles from './layout.module.scss'
 
-import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
+import Header from '@/components/shared/Header'
+import { Providers } from '@/components/shared/Providers'
 
-import * as gtag from '@/lib/client/gtag'
-import { existsGaId, GA_ID } from '@/lib/client/gtag'
+import { currentUserAtom } from '@/lib/client/atoms/currentUser'
 import { firebaseClientAuth } from '@/lib/client/firebaseClient'
-import { currentUserState } from '@/lib/client/atoms/currentUser'
+import * as gtag from '@/lib/client/gtag'
 
 import './globals.css'
 
 const AppInit = () => {
-  const setCurrentUser = useSetRecoilState(currentUserState)
+  const setCurrentUser = useSetAtom(currentUserAtom)
   const fetchSetUser = async () => {
     try {
-      onAuthStateChanged(firebaseClientAuth, async (user) => {
+      onAuthStateChanged(firebaseClientAuth, async user => {
         if (!user) {
           signInAnonymously(firebaseClientAuth)
-            .then(async (e) => {
+            .then(async e => {
               if (e.user) {
                 setCurrentUser({
-                  uid: e.user.uid,
+                  uid: e.user.uid ?? '',
                   displayName: e.user.displayName,
-                  isAnonymus: e.user.isAnonymous,
+                  isAnonymous: e.user.isAnonymous,
                 })
               }
               // eslint-disable-next-line no-console
@@ -36,29 +37,37 @@ const AppInit = () => {
             })
         } else {
           setCurrentUser({
-            uid: user.uid,
+            uid: user.uid ?? '',
             displayName: user.displayName,
-            isAnonymus: user.isAnonymous,
+            isAnonymous: user.isAnonymous,
           })
         }
       })
     } catch {
-      setCurrentUser(null)
+      setCurrentUser({
+        uid: null,
+        displayName: null,
+        isAnonymous: null,
+      })
     }
   }
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     fetchSetUser()
   }, [])
   return null
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: { children: React.ReactNode }) {
   useEffect(() => {
     if (!gtag.existsGaId) {
       return
     }
 
-    const handleRouteChange = (path) => {
+    const handleRouteChange = path => {
       gtag.pageview(path)
     }
 
@@ -69,12 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, [])
 
   return (
+    // biome-ignore lint/a11y/useHtmlLang: <explanation>
     <html>
       <head>
         {/* Google Analytics */}
-        {existsGaId && (
+        {/* {existsGaId && (
           <>
-            {' '}
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
             <script
               dangerouslySetInnerHTML={{
@@ -88,15 +97,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
           </>
-        )}
+        )} */}
       </head>
       <body>
-        <RecoilRoot>
+        <Providers>
           <AppInit />
           <Header />
-          <main className="bg-blue-100 text-black">{children}</main>
+          <main className={styles.container}>{children}</main>
           <Footer />
-        </RecoilRoot>
+        </Providers>
       </body>
     </html>
   )

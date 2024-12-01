@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import { describe, it, vi } from 'vitest'
+import { expect } from 'vitest'
+
 import Page from '../../app/page'
 
-jest.mock('next/router', () => require('next-router-mock'))
 describe('Home', () => {
   it('renders a heading', () => {
     render(<Page />)

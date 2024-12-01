@@ -1,11 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
+import styles from './page.module.scss'
 
 import { Button } from '@/components/shared/Button'
 import TodoForm from '@/components/todo/TodoForm'
 
 import { deleteTodo, getTodos } from '@/lib/client/api/todos'
-import { Todo } from '@/lib/shared/todo'
+import type { Todo } from '@/lib/shared/todo'
 
 export default function Page() {
   const [todos, setTodos] = useState<Array<Todo>>([])
@@ -14,6 +15,7 @@ export default function Page() {
     setTodos(await getTodos())
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     fetchTodos()
   }, [])
@@ -28,21 +30,25 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full">
-      <section className="p-2 max-w-screen-sm m-auto">
+    <div className={styles.container}>
+      <section className={styles.section}>
         <TodoForm onCreateTodo={onCreateTodo} />
       </section>
-      <section className="p-3 max-w-screen-sm m-auto">
-        <h3 className="text-2xl font-bold m-2 text-center">ToDoリスト（CSR）</h3>
-        <ul className="m-3">
+      <section className={styles.section}>
+        <h3 className={styles.heading}>ToDoリスト（CSR）</h3>
+        <ul className={styles.ul}>
           {todos.map((todo: Todo, index: number) => {
             return (
-              <li key={index} className="m-3 p-3 bg-white rounded">
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              <li key={index} className={styles.todoItem}>
                 <div>
-                  <div className="font-bold">{todo.name}</div>
-                  <div className="mt-3 break-words">{todo.content}</div>
+                  <div className={styles.todoName}>{todo.name}</div>
+                  <div className={styles.todoContent}>{todo.content}</div>
                 </div>
-                <Button onClick={async () => await clickDeleteButton(todo.id)} label={'削除する'} />
+                <Button
+                  onClick={async () => await clickDeleteButton(todo.id)}
+                  label={'削除する'}
+                />
               </li>
             )
           })}

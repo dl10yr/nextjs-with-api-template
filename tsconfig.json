@@ -1,31 +1,41 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/lib/*": ["lib/*"]
-    },
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/privacy-policy"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "esnext",
+		"baseUrl": ".",
+		"paths": {
+			"@/components/*": ["components/*"],
+			"@/pages/*": ["pages/*"],
+			"@/lib/*": ["lib/*"]
+		},
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"strictNullChecks": true,
+		"types": ["vitest/globals", "@testing-library/jest-dom", "gtag.js"]
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"app/privacy-policy",
+		"vitest.setup.mts",
+		"vitest.config.mts"
+	],
+	"exclude": ["node_modules"]
 }
