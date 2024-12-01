@@ -25,9 +25,8 @@ Next.js でバックエンドの API も構築しています。firebase の`idT
 
 ```
 1. git clone
-2. yarn
-3. firebaseClient.tsのCLIENT_CONFIGを変更
-4. .env.sampleを.envにして内容変更
-5. yarn prisma:push
-6. yarn dev
+2. npm install
+3. .env.sampleを.envにして内容変更
+4. npm prisma:push
+5. npm run dev
 ```
