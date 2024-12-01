@@ -1,11 +1,14 @@
 import { type NextRequestWithUser, authPlugin } from '@/lib/server/authPlugin'
 import { deleteTodo } from '@/lib/server/todo'
 
-export default async function DELETE(req: NextRequestWithUser, { params }) {
+export async function DELETE(
+  req: NextRequestWithUser,
+  { params }: { params: { slug: string } },
+) {
   await authPlugin(req)
 
-  const id = params.slug
-  await deleteTodo(id as string)
+  const { slug } = await params
+  await deleteTodo(slug)
 
   return new Response(null, {
     status: 204,
