@@ -11,7 +11,7 @@ const Footer: FC = () => {
         </Link>
       </div>
       <div className={styles.copyright}>
-        Copyright© XXX , 2022 All Rights Reserved.
+        Copyright© XXX , 2024 All Rights Reserved.
       </div>
     </footer>
   )
