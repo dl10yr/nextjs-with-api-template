@@ -1,6 +1,6 @@
 # nextjs-with-api-template
 
-`Next.js` + `Prisma.js` + `PlanetScale` +`Firebase Auth（匿名ログイン）` + `Tailwind CSS`による Todo アプリのテンプレートです。
+`Next.js` + `Prisma.js` + `PlanetScale` +`Firebase Auth（匿名ログイン）` による Todo アプリのテンプレートです。
 
 ## 詳しい説明
 

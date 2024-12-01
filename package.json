@@ -26,7 +26,6 @@
 		"next": "^15.0.3",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"tailwindcss": "^3.4.15",
 		"ulid": "^2.3.0"
 	},
 	"devDependencies": {
