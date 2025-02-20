@@ -1,5 +1,5 @@
 'use client'
-import { postTodo } from '@/lib/client/api/todos'
+import { postTodo } from '@/features/todos/todoApi'
 import { type FC, useState } from 'react'
 import { Button } from '../shared/Button'
 import styles from './TodoForm.module.scss'
