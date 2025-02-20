@@ -5,7 +5,7 @@ import styles from './page.module.scss'
 import { Button } from '@/components/shared/Button'
 import TodoForm from '@/components/todo/TodoForm'
 
-import { deleteTodo, getTodos } from '@/lib/client/api/todos'
+import { deleteTodo, getTodos } from '@/features/todos/todoApi'
 import type { Todo } from '@/lib/shared/todo'
 
 export default function Page() {
